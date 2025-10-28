@@ -1,0 +1,50 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>My Page with Iframe</title>
+        </head>
+        <body>
+            <!--
+			<h1>Welcome to my page!</h1>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/K6xIlDtTwYM?si=2tFtMTg8UjqxLfcZ?autoplay=1" allow='autoplay' title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <p>This is some content after the iframe.</p>
+			-->
+			<!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+			<div id="player"></div>
+			<script>
+			var player;
+				var isUnMuted = false;
+				window.onYouTubeIframeAPIReady = function() {
+					player = new YT.Player('youTube', {
+						videoId: 'K6xIlDtTwYM?',
+						playerVars: {
+							'rel': 0,
+						},
+						events: {
+							'onReady': function() {
+								player.mute();
+								player.playVideo();
+							},
+							'onStateChange': function () {
+								if (player.isMuted() && player.getPlayerState() == 2 && !isUnMuted) {
+									player.unMute();
+									player.playVideo();
+									isUnMuted = true;
+								}
+							}
+						}
+					});
+				}
+
+				
+				  // 4. The API will call this function when the video player is ready.
+			  function onPlayerReady(event) {
+				event.target.mute();
+			  }
+			</script>
+			
+        </body>
+        </html>
+		
+		
+			
