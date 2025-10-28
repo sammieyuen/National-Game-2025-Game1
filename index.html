@@ -26,14 +26,31 @@
           playerVars: {
             'playsinline': 1,
 			 autoplay: 1,
+			 mute: 1,
 			 controls: 1,
 			 loop: 1, // This can be set here or handled in onStateChange
 			 playlist: "K6xIlDtTwYM" // Required if loop is set to 1 for a single vide
           },
+			/*
           events: {
             'onReady': onPlayerReady,
             'onStateChange': onPlayerStateChange
           }
+		  */
+	
+			events: {
+						'onReady': function() {
+							player.mute();
+							player.playVideo();
+						},
+						'onStateChange': function () {
+							if (player.isMuted() && player.getPlayerState() == 2 && !isUnMuted) {
+								player.unMute();
+								player.playVideo();
+								isUnMuted = true;
+							}
+						}
+			}
         });
       }
 
@@ -62,6 +79,7 @@
 		
 
 			
+
 
 
 
