@@ -11,14 +11,20 @@
 			-->
 			<!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
 			<div id="player"></div>
-			<script>
+						<script>
 			var player;
 				var isUnMuted = false;
 				window.onYouTubeIframeAPIReady = function() {
 					player = new YT.Player('youTube', {
-						videoId: 'K6xIlDtTwYM?',
+						videoId: 'K6xIlDtTwYM',
+						width="1100", 
+						height="780" ,
 						playerVars: {
 							'rel': 0,
+							 autoplay: 1,
+							controls: 1,
+							loop: 1, // This can be set here or handled in onStateChange
+							playlist: "K6xIlDtTwYM", // Required if loop is set to 1 for a single vide
 						},
 						events: {
 							'onReady': function() {
@@ -37,9 +43,10 @@
 				}
 
 				
-				  // 4. The API will call this function when the video player is ready.
+			 // 4. The API will call this function when the video player is ready.
 			  function onPlayerReady(event) {
-				event.target.mute();
+				//event.target.mute();
+				event.target.playVideo();
 			  }
 			</script>
 			
@@ -47,4 +54,5 @@
         </html>
 		
 		
+
 			
